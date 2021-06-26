@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata modelVersion="1.1.0">
+  <groupId>digilib</groupId>
+  <artifactId>digilib-webapp</artifactId>
+  <version>2.10-SNAPSHOT</version>
+  <versioning>
+    <snapshot>
+      <timestamp>20210610.123418</timestamp>
+      <buildNumber>9</buildNumber>
+    </snapshot>
+    <lastUpdated>20210610123418</lastUpdated>
+    <snapshotVersions>
+      <snapshotVersion>
+        <extension>war</extension>
+        <value>2.10-20210610.123418-9</value>
+        <updated>20210610123418</updated>
+      </snapshotVersion>
+      <snapshotVersion>
+        <extension>pom</extension>
+        <value>2.10-20210610.123418-9</value>
+        <updated>20210610123418</updated>
+      </snapshotVersion>
+    </snapshotVersions>
+  </versioning>
+</metadata>

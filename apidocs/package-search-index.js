@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"digilib.auth"},{"l":"digilib.conf"},{"l":"digilib.image"},{"l":"digilib.io"},{"l":"digilib.meta"},{"l":"digilib.pdf"},{"l":"digilib.servlet"},{"l":"digilib.util"}]
