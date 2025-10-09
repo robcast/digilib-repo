@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <digilib.version>2.11.2</digilib.version>
+    <slf4j.version>1.7.32</slf4j.version>
+  </properties>
+
+  <groupId>digilib</groupId>
+  <artifactId>digilib</artifactId>
+  <version>2.11.2</version>
+  <packaging>pom</packaging>
+
+  <name>digilib</name>
+  <description>The Digital Image Library</description>
+  <url>https://robcast.github.io/digilib/</url>
+  <inceptionYear>2001</inceptionYear>
+
+  <organization>
+    <name>digilib Community</name>
+    <url>https://robcast.github.io/digilib/</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <id>robcast</id>
+      <name>Robert Casties</name>
+      <email>robcast@users.sourceforge.net</email>
+      <organization>Max Planck Institute for the History of Science (MPIWG)</organization>
+      <organizationUrl>http://www.mpiwg-berlin.mpg.de</organizationUrl>
+      <roles>
+        <role>developer</role>
+        <role>architect</role>
+      </roles>
+    </developer>
+    <developer>
+      <id>hertzhaft</id>
+      <name>Martin Raspe</name>
+      <email>hertzhaft@users.sourceforge.net</email>
+      <organization>Bibliotheca Hertziana</organization>
+      <organizationUrl>http://www.biblhertz.it</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
+  <contributors>
+    <contributor>
+      <name>Gerd Grasshoff</name>
+      <organization>Humboldt Universität Berlin</organization>
+      <organizationUrl>http://www.hu-berlin.de</organizationUrl>
+      <roles>
+        <role>former developer</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Robert Gordesch</name>
+      <organization>Max Planck Institute for the History of Science (MPIWG)</organization>
+      <roles>
+        <role>former developer</role>
+      </roles>
+    </contributor>
+    <contributor>
+      <name>Christian Luginbuehl</name>
+      <organization>Universität Bern</organization>
+      <roles>
+        <role>former developer</role>
+      </roles>
+    </contributor>
+  </contributors>
+  <licenses>
+    <license>
+      <name>GNU General Lesser Public License (LGPL) version 3.0</name>
+      <url>http://www.gnu.org/licenses/lgpl-3.0-standalone.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <connection>scm:git:https://github.com/robcast/digilib.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/robcast/digilib.git</developerConnection>
+    <url>https://github.com/robcast/digilib</url>
+  </scm>
+  <issueManagement>
+    <system>Github Issues</system>
+    <url>https://github.com/robcast/digilib/issues</url>
+  </issueManagement>
+  <mailingLists>
+    <mailingList>
+      <name>Developer List</name>
+      <subscribe>http://lists.sourceforge.net/lists/listinfo/digilib-devel</subscribe>
+      <unsubscribe>http://lists.sourceforge.net/lists/listinfo/digilib-devel</unsubscribe>
+      <archive>http://sourceforge.net/p/digilib/mailman/digilib-devel</archive>
+    </mailingList>
+  </mailingLists>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.1</version>
+          <configuration>
+            <!-- minimum Java 1.8 -->
+            <source>1.8</source>
+            <target>1.8</target>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-scm-plugin</artifactId>
+        <version>1.11.2</version>
+        <configuration>
+          <goals>install</goals>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>license-maven-plugin</artifactId>
+        <version>2.0.0</version>
+        <configuration>
+          <!-- <verbose>false</verbose> -->
+          <licenseName>lgpl_v3</licenseName>
+          <!-- <useMissingFile>true</useMissingFile> -->
+          <!-- servlet-api is never included in packaging -->
+          <excludedArtifacts>servlet-api</excludedArtifacts>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.1.1</version>
+        <configuration>
+          <source>1.8</source>
+          <doclint>none</doclint>
+          <show>package</show>
+          <nohelp>true</nohelp>
+        </configuration>
+        <executions>
+          <execution>
+            <id>aggregate</id>
+            <goals>
+              <goal>aggregate</goal>
+            </goals>
+            <phase>site</phase>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <profiles>
+    <profile>
+      <!-- old Servlet API 2.x -->
+      <id>servlet2</id>
+      <modules>
+        <module>servlet2</module>
+        <module>webapp-srv2</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>servlet3</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+    </profile>
+    <!-- optional modules with dependencies selected by profile -->
+    <profile>
+      <id>text</id>
+      <modules>
+        <module>text</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>iiif-presentation</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <modules>
+        <module>iiif-presentation</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>pdf</id>
+      <modules>
+        <module>pdf</module>
+        <module>frontend-pdf</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>storage-cdstar</id>
+      <modules>
+        <module>common-cdstar</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>build-all</id>
+      <!-- profile to build all dependencies -->
+      <modules>
+        <module>common-cdstar</module>
+        <module>text</module>
+        <module>pdf</module>
+        <module>iiif-presentation</module>
+        <module>servlet2</module>
+        <module>webapp-srv2</module>
+        <module>frontend-pdf</module>
+        <module>frontend-greyskin</module>
+        <module>frontend-oldskin</module>
+      </modules>
+    </profile>
+  </profiles>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- common dependency versions -->
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.json</groupId>
+        <artifactId>javax.json-api</artifactId>
+        <version>1.0</version><!-- 1.1+ does not work with jetty 9.2 needed for webapp-test -->
+      </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.13.1</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+  </dependencies>
+  <!-- default modules -->
+  <modules>
+    <module>doc</module>
+    <module>common</module>
+    <module>servlet</module>
+    <module>servlet3</module>
+    <module>webapp</module>
+    <module>frontend-jquery</module>
+  </modules>
+  <ciManagement>
+    <system>Travis CI</system>
+    <url>https://travis-ci.org/robcast/digilib</url>
+  </ciManagement>
+</project>
